@@ -19,6 +19,14 @@ class Station
     returned_stations
   end
 
+  define_singleton_method(:find) do |id|
+    Station.all().each() do |station|
+      if station.id().==(id)
+        return station
+      end
+    end
+  end
+
   define_method(:save) do
     result = DB.exec("INSERT INTO stations (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first().fetch("id").to_i()

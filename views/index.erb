@@ -1,0 +1,43 @@
+<div class="col-xs-6">
+  <p>Add a station to the system:</p>
+
+  <form action="/add_station" method="post">
+    <input id="name" name="name" type="text">
+
+    <button type="submit">Add Station</button>
+  </form>
+
+  <% if @stations.any?() %>
+    <p>Click on a station to add lines that pass through it.</p>
+
+    <ul>
+      <% @stations.each do |station| %>
+        <li><a href="/stations/<%= station.id() %>"><%= station.name() %></a></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>There are no stations yet.</p>
+  <% end %>
+
+</div>
+
+<div class="col-xs-6">
+  <p>Add a line to the system:</p>
+  <form action="/add_line" method="post">
+    <input id="number" name="number" type="text">
+
+    <button type="submit">Add Line</button>
+  </form>
+
+  <% if @lines.any?() %>
+    <p>Click on a line to add stations to its route.</p>
+
+    <ul>
+      <% @lines.each do |line| %>
+        <li><a href="/lines/<%= line.id() %>"><%= line.number() %></a></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>There are no lines yet.</p>
+  <% end %>
+</div>

@@ -17,6 +17,14 @@ class Line
     returned_lines
   end
 
+  define_singleton_method(:find) do |id|
+    Line.all().each() do |line|
+      if line.id().==(id)
+        return line
+      end
+    end
+  end
+
   define_method(:save) do
     result = DB.exec("INSERT INTO lines (number) VALUES (#{@number}) RETURNING id;")
     @id = result.first().fetch("id").to_i()
